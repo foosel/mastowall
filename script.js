@@ -172,6 +172,18 @@ $(document).ready(async function() {
     const hashtags = getUrlParameter('hashtags');
     const hashtagsArray = hashtags ? hashtags.split(',') : [];
     const serverUrl = getUrlParameter('server') || defaultServerUrl;
+    const embed = /^true$/i.test(getUrlParameter('embed')) || false;
+    const css = getUrlParameter('css') || false;
+
+    if (embed) {
+        $('.navbar').addClass('d-none');
+        $('.footer').addClass('d-none');
+        $('body').addClass('embed');
+    };
+
+    if (css) {
+        $('head').append(`<link rel="stylesheet" href="${css}">`);
+    };
 
     $('#hashtag-display').on('click', function() {
         handleHashtagDisplayClick(serverUrl);
